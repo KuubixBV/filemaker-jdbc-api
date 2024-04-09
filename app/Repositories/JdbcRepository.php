@@ -13,7 +13,11 @@ class JdbcRepository implements JdbcRepoInterface
 
     public function __construct()
     {
-        $this->jdbc = App::make('jdbc');
+        $provider = App::make('jdbc');
+
+        if ($provider) {
+            $this->jdbc = App::make('jdbc');
+        }
     }
 
     /**
@@ -24,7 +28,7 @@ class JdbcRepository implements JdbcRepoInterface
      */
     public function makeRequest(string $sql): mixed
     {
-        if (!$this->jdbc) {
+        if (!isset($this->jdbc)) {
             throw new Exception('JDBC connection not found');
         }
 
