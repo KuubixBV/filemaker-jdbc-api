@@ -21,15 +21,11 @@ class JdbcProvider extends ServiceProvider
             $database = env('JDBC_DATABASE', 'database');
 
             $bridge = new PJBridge($host, $port, 'utf-8', 'utf-8');
-
-            try {
-                $connection = $bridge->connect($database, $user, $password);
-                if (!$connection) {
-                    throw new Exception("JDBC Connection failed to resolve...");
-                }
-            } catch (Exception $e) {
-                Log::error($e->getMessage());
-                return null;
+            $connectString = "jdbc:filemaker://$host/$database";
+            
+            $connection = $bridge->connect($connectString, $user, $password);
+            if (!$connection) {
+                throw new Exception("JDBC Connection failed to resolve...");
             }
 
             return $bridge;
