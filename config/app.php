@@ -18,9 +18,6 @@ return [
             explode(',', env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
-    'providers' => [
-        App\Providers\JdbcProvider::class,
-    ],
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
