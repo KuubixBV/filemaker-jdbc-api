@@ -20,11 +20,11 @@ class JdbcRepository implements JdbcRepoInterface
      * Make a request to the JDBC connection
      * 
      * @param string $sql
-     * @return array
+     * @return mixed
      */
-    public function makeRequest(string $sql): array
+    public function makeRequest(string $sql): mixed
     {
-        if ($this->jdbc) {
+        if (!$this->jdbc) {
             throw new Exception('JDBC connection not found');
         }
 
